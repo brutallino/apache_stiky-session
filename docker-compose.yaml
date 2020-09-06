@@ -1,0 +1,40 @@
+version: '3'
+services:
+  web1:
+    image: httpd
+    ports:
+      - 81:80
+    volumes:
+      - ./web1/public-html/:/usr/local/apache2/htdocs/
+  web2:
+    image: httpd
+    ports:
+      - 82:80
+    volumes:
+      - ./web2/public-html/:/usr/local/apache2/htdocs/
+  web3:
+    image: httpd
+    ports:
+      - 83:80
+    volumes:
+      - ./web3/public-html/:/usr/local/apache2/htdocs/
+  web4:
+    image: httpd
+    ports:
+      - 84:80
+    volumes:
+      - ./web4/public-html/:/usr/local/apache2/htdocs/
+  web-proxy:
+    image:  httpd
+    ports:
+      - 80:80
+    volumes:
+      - ./web-proxy/httpd.conf:/usr/local/apache2/conf/httpd.conf
+    deploy:
+      resources:
+          limits:
+            cpus: '0.50'
+            memory: 50M
+          reservations:
+            cpus: '0.25'
+            memory: 20M
